@@ -1,9 +1,9 @@
 import { jest } from '@jest/globals';
 
 // Mock dependencies
-const mockQuery = jest.fn();
-const mockTransaction = jest.fn();
-const mockRequireAuth = jest.fn();
+const mockQuery = jest.fn<any>();
+const mockTransaction = jest.fn<any>();
+const mockRequireAuth = jest.fn<any>();
 const mockLogger = {
   info: jest.fn(),
   error: jest.fn(),

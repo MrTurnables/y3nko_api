@@ -54,7 +54,7 @@ describe('Database Configuration', () => {
 
     it('should handle connection errors', async () => {
       const error = new Error('Connection failed');
-      (postgres as jest.MockedFunction<typeof postgres>).mockImplementation(() => {
+      (postgres as any).mockImplementation(() => {
         throw error;
       });
 
@@ -124,7 +124,7 @@ describe('Database Configuration', () => {
   describe('transaction', () => {
     it('should execute transactions successfully', async () => {
       const mockResult = { id: 1, name: 'Test' };
-      const mockCallback = jest.fn().mockResolvedValue(mockResult);
+      const mockCallback = jest.fn<any>().mockResolvedValue(mockResult);
       
       mockSql.begin.mockImplementation(async (callback: any) => {
         return await callback(mockSql);
@@ -139,7 +139,7 @@ describe('Database Configuration', () => {
 
     it('should handle transaction errors', async () => {
       const error = new Error('Transaction failed');
-      const mockCallback = jest.fn().mockRejectedValue(error);
+      const mockCallback = jest.fn<any>().mockRejectedValue(error);
       
       mockSql.begin.mockImplementation(async (callback: any) => {
         try {

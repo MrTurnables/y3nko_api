@@ -1,7 +1,7 @@
 import { jest } from '@jest/globals';
 
 // Mock Firebase Admin before importing
-const mockVerifyIdToken = jest.fn();
+const mockVerifyIdToken = jest.fn<any>();
 jest.mock('firebase-admin', () => ({
   initializeApp: jest.fn(),
   credential: {

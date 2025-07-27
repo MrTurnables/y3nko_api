@@ -24,7 +24,7 @@ jest.mock('postgres', () => {
   const mockBegin = jest.fn();
   const mockConnect = jest.fn();
   
-  return jest.fn(() => ({
+  const mockPostgres: any = jest.fn(() => ({
     unsafe: mockQuery,
     begin: mockBegin,
     connect: mockConnect,
@@ -35,6 +35,14 @@ jest.mock('postgres', () => {
     catch: jest.fn(),
     finally: jest.fn(),
   }));
+  
+  // Add static methods to match postgres interface
+  mockPostgres.toPascal = jest.fn();
+  mockPostgres.fromPascal = jest.fn();
+  mockPostgres.toCamel = jest.fn();
+  mockPostgres.fromCamel = jest.fn();
+  
+  return mockPostgres;
 });
 
 // Mock logger
